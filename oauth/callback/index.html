@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>OAuth 연결 결과 | GATE Content Publisher</title>
+  <link rel="stylesheet" href="../../assets/site.css">
+</head>
+<body>
+<main class="callback">
+  <p class="eyebrow">GATE CONTENT PUBLISHER</p>
+  <h1>계정 연결 반환 페이지</h1>
+  <p id="status" class="lead">TikTok 인증 결과를 확인하는 중입니다.</p>
+  <div class="notice">
+    <strong>보안 안내</strong>
+    <p>인증 코드가 포함된 주소를 공개 채팅이나 다른 사람에게 보내지 마세요. GATE 운영 환경의 OAuth 연결 절차에서만 사용합니다.</p>
+  </div>
+  <p><a href="../../">앱 홈페이지로 돌아가기</a></p>
+</main>
+<script>
+(() => {
+  const query = new URLSearchParams(location.search);
+  const status = document.getElementById('status');
+  if (query.has('error')) {
+    status.textContent = 'TikTok 계정 연결이 완료되지 않았습니다. 원래 화면으로 돌아가 오류 내용을 확인해 주세요.';
+  } else if (query.has('code') && query.has('state')) {
+    status.textContent = 'TikTok에서 인증 응답을 받았습니다. GATE 운영 환경에서 코드와 state를 검증한 뒤 연결을 완료해야 합니다.';
+  } else {
+    status.textContent = '인증 응답 정보가 없습니다. GATE의 계정 연결 절차에서 다시 시작해 주세요.';
+  }
+})();
+</script>
+</body>
+</html>
